@@ -17,12 +17,3 @@ export const createOrder = async (order) => {
     console.error(ex);
   }
 };
-export const fetchOrder = async (id) => {
-  try {
-    const response = await axios.get(`https://localhost:7127/Order/${id}`);
-    return response.data;
-  } catch (ex) {
-    console.error('Ошибка при получении заказа:', ex);
-    throw ex; 
-  }
-};

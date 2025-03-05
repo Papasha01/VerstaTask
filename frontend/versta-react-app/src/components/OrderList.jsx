@@ -1,5 +1,5 @@
 import { fetchOrders } from "@/services/orders";
-import { Table, Button, DataList } from "@chakra-ui/react";
+import { Table, DataList, Heading , Flex} from "@chakra-ui/react";
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import OrderAdd from "./OrderAdd";
@@ -18,7 +18,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./ui/date-picker.css";
 
 function OrderList() {
-
   const [order, setOrder] = useState({
     senderCity: "",
     senderAddress: "",
@@ -43,7 +42,7 @@ function OrderList() {
     let orders = await fetchOrders();
     setOrders(orders);
   };
-  
+
   const didMountRef = useRef(false);
   useEffect(() => {
     if (didMountRef.current) return;
@@ -53,75 +52,76 @@ function OrderList() {
   }, []);
 
   return (
-    <>
-      <OrderAdd onButtonClick={fetchData}/>
-
-      <DialogRoot>
-        <DialogTrigger asChild>
-          <Table.Root size="sm">
-            <Table.Header>
-              <Table.Row>
-                <Table.ColumnHeader>ID</Table.ColumnHeader>
-                <Table.ColumnHeader>Город отправителя</Table.ColumnHeader>
-                <Table.ColumnHeader>Адрес отправителя</Table.ColumnHeader>
-                <Table.ColumnHeader>Город получателя</Table.ColumnHeader>
-                <Table.ColumnHeader>Адрес получателя</Table.ColumnHeader>
-                <Table.ColumnHeader>Вес груза</Table.ColumnHeader>
-                <Table.ColumnHeader>Дата забора</Table.ColumnHeader>
-                <Table.ColumnHeader>Создано</Table.ColumnHeader>
-              </Table.Row>
-            </Table.Header>
-
-            <Table.Body>
-              {orders.map((item) => (
-                <Table.Row
-                  key={item.id}
-                  onClick={() => handleRowClick(item)}
-                  cursor="pointer"
-                  _hover={{ bg: "gray.100" }}
-                >
-                  <Table.Cell>{item.id}</Table.Cell>
-                  <Table.Cell>{item.senderCity}</Table.Cell>
-                  <Table.Cell>{item.senderAddress}</Table.Cell>
-                  <Table.Cell>{item.recipientCity}</Table.Cell>
-                  <Table.Cell>{item.recipientAddress}</Table.Cell>
-                  <Table.Cell>{item.cargoWeight}</Table.Cell>
-                  <Table.Cell>
-                    {moment(item.pickupDate).format("DD.MM.YYYY")}
-                  </Table.Cell>
-                  <Table.Cell>
-                    {moment(item.createdAt).format("DD.MM.YYYY h:mm:ss")}
-                  </Table.Cell>
+    <div>
+      <Flex justifyContent="space-between" alignItems="c" mb={4}>
+        <Heading as="h1" size="lg">
+          Список заказов
+        </Heading>
+        <OrderAdd onButtonClick={fetchData} />
+        </Flex>
+        <DialogRoot>
+          <DialogTrigger asChild>
+            <Table.Root size="sm">
+              <Table.Header>
+                <Table.Row>
+                  <Table.ColumnHeader>ID</Table.ColumnHeader>
+                  <Table.ColumnHeader>Город отправителя</Table.ColumnHeader>
+                  <Table.ColumnHeader>Адрес отправителя</Table.ColumnHeader>
+                  <Table.ColumnHeader>Город получателя</Table.ColumnHeader>
+                  <Table.ColumnHeader>Адрес получателя</Table.ColumnHeader>
+                  <Table.ColumnHeader>Вес груза</Table.ColumnHeader>
+                  <Table.ColumnHeader>Дата забора</Table.ColumnHeader>
+                  <Table.ColumnHeader>Создано</Table.ColumnHeader>
                 </Table.Row>
-              ))}
-            </Table.Body>
-          </Table.Root>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Dialog Title</DialogTitle>
-          </DialogHeader>
-          <DialogBody>
-            <div>
-              <DataList.Root orientation="vertical">
-                {" "}
-                {/* Изменил ориентацию на вертикальную для лучшего отображения */}
-                {orderStats.map((item) => (
-                  <DataList.Item key={item.label}>
-                    <DataList.ItemLabel>{item.label}</DataList.ItemLabel>
-                    <DataList.ItemValue>{item.value}</DataList.ItemValue>
-                  </DataList.Item>
-                ))}
-              </DataList.Root>
-            </div>
-          </DialogBody>
-          <DialogFooter>
+              </Table.Header>
 
-          </DialogFooter>
-          <DialogCloseTrigger />
-        </DialogContent>
-      </DialogRoot>
-    </>
+              <Table.Body>
+                {orders.map((item) => (
+                  <Table.Row
+                    key={item.id}
+                    onClick={() => handleRowClick(item)}
+                    cursor="pointer"
+                    _hover={{ bg: "gray.100" }}
+                  >
+                    <Table.Cell>{item.id}</Table.Cell>
+                    <Table.Cell>{item.senderCity}</Table.Cell>
+                    <Table.Cell>{item.senderAddress}</Table.Cell>
+                    <Table.Cell>{item.recipientCity}</Table.Cell>
+                    <Table.Cell>{item.recipientAddress}</Table.Cell>
+                    <Table.Cell>{item.cargoWeight}</Table.Cell>
+                    <Table.Cell>
+                      {moment(item.pickupDate).format("DD.MM.YYYY")}
+                    </Table.Cell>
+                    <Table.Cell>
+                      {moment(item.createdAt).format("DD.MM.YYYY h:mm:ss")}
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table.Root>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Информация о заказе</DialogTitle>
+            </DialogHeader>
+            <DialogBody>
+              <div>
+                <DataList.Root orientation="vertical">
+                  {orderStats.map((item) => (
+                    <DataList.Item key={item.label}>
+                      <DataList.ItemLabel>{item.label}</DataList.ItemLabel>
+                      <DataList.ItemValue>{item.value}</DataList.ItemValue>
+                    </DataList.Item>
+                  ))}
+                </DataList.Root>
+              </div>
+            </DialogBody>
+            <DialogFooter></DialogFooter>
+            <DialogCloseTrigger />
+          </DialogContent>
+        </DialogRoot>
+
+    </div>
   );
 }
 
