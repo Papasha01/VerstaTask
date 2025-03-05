@@ -1,22 +1,12 @@
-
-import { useState } from 'react'
-import { Button, HStack } from "@chakra-ui/react"
-import { Table } from "@chakra-ui/react"
-
-import './App.css'
+import "./App.css";
+import OrderList from "./components/OrderList";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    <HStack>
-      <Button>Click me</Button>
-      <Button>Click me</Button>
-    </HStack>
-    
+       <OrderList /> 
     </>
-  )
+  );
 }
 
-export default App
+export default App;
