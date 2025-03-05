@@ -1,75 +1,62 @@
-# Запуск проекта
+# Проект: Тестовое задание Versta
+
+## Описание
+Этот проект представляет собой веб-приложение, для приемки заказа на доставку.
+
+
+## Технологии
+- **Backend:** ASP.NET 9
+- **Frontend:** React.js
+- **ORM:** Entity Framework
+- **База данных:** SQLite
 
 ## Требования
-
-Для работы проекта необходимо установить:
-
-- .NET 9
-- Node.js
-- SQLite
+Перед началом работы убедитесь, что у вас установлены:
+- [.NET 9 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+- [Node.js (LTS)](https://nodejs.org/)
+- [SQLite](https://www.sqlite.org/download.html)
 
 ## Установка и запуск
 
 ### 1. Клонирование репозитория
-
-Склонируйте репозиторий с исходным кодом:
-
 ```sh
 git clone https://github.com/Papasha01/VerstaTask
 cd VerstaTask
 ```
 
-### 2. Настройка backend
-
-Перейдите в папку backend и установите зависимости:
-
+### 2. Запуск backend-а
 ```sh
-cd .\backend\VerstaTask\
-dotnet add package Microsoft.EntityFrameworkCore
-dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite
-dotnet add package Microsoft.EntityFrameworkCore.Tools
-dotnet tool install --global dotnet-ef
+cd backend\VerstaTask
+
+# Установка зависимостей
+dotnet restore
+
+# Применение миграций
+dotnet ef migrations add Init -s .\API\ -p .\DataAccess\
 dotnet ef database update -s .\API\ -p .\DataAccess\
+
+# Запуск
 dotnet run --project .\src\API\API.csproj
-dotnet build .\VerstaTask.sln
-http://localhost:5056/swagger/index.html
-https://localhost:7127
-npm install
+
+```
+
+Backend запустится на `http://localhost:5056/swagger`.
+
+### 3. Запуск frontend-а
+```sh
+cd frontend\versta-react-app
+
+# Установка зависимостей
+npm i
+
+# Запуск
 npm run dev
 ```
 
-Создайте и примените миграции базы данных:
+Ссылка на Frontend часть будет выведена в консоль.
+### 4. Пример работы 
+![chrome_GzhnhwPmFs](https://github.com/user-attachments/assets/b50a8395-a213-4088-8800-ac1b1b09e6e9)
 
-```sh
-dotnet ef migrations add InitialCreate
-dotnet ef database update
-```
+![chrome_jIPYmExWMl](https://github.com/user-attachments/assets/5e1961e7-5162-4a73-9b1b-1a7b40c54639)
 
-Запустите сервер:
-
-```sh
-dotnet run
-```
-
-### 3. Настройка frontend
-
-Перейдите в папку frontend и установите зависимости:
-
-```sh
-cd ../frontend
-npm install
-```
-
-Запустите React-приложение:
-
-```sh
-npm start
-```
-
-После запуска backend и frontend приложение будет доступно по адресу:
-
-```
-http://localhost:3000
-```
-
+### Если ты лид, и читаешь это, и возникли сложности воспроизведения инструкции запуска, можешь писать [@Levykinx](https://t.me/Levykinx)
