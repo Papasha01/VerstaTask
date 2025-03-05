@@ -506,3 +506,4 @@ $RECYCLE.BIN/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/backend/VerstaTask/src/DataAccess/Migrations/
