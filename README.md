@@ -59,4 +59,4 @@ npm run dev
 
 ![chrome_jIPYmExWMl](https://github.com/user-attachments/assets/5e1961e7-5162-4a73-9b1b-1a7b40c54639)
 
-### Если ты лид, и читаешь это, и возникли сложности воспроизведения инструкции запуска, можешь писать [@Levykinx](https://t.me/Levykinx)
+По любым вопросам пишите [@Levykinx](https://t.me/Levykinx)
